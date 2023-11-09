@@ -1,5 +1,6 @@
-import { View, Text, Image, StyleSheet, Dimensions} from "react-native";
-import theme from "../themes";
+import { View, Image, StyleSheet, Dimensions} from "react-native";
+import theme from "./themes";
+import Text from "./Text";
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -19,6 +20,7 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
             width: 50,
             height: 50,
             margin: 10,
+            marginTop: 20,
             borderRadius: 10
         },
         header: {
@@ -87,7 +89,7 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
                 </View>
                 <View style={styles.innerRating}>
                     <Text>{rating}</Text>
-                    <Text>Rating</Text>
+                    <Text>Ratings</Text>
                 </View>
             </View>
         </View>
