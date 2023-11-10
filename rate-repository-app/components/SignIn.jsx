@@ -5,7 +5,9 @@ import { Pressable, View } from "react-native";
 import { StyleSheet } from "react-native";
 import theme from "./themes";
 import * as yup from 'yup';
-import { Form } from "formik";
+import useSignIn from "../hooks/useSignIn";
+import AuthStorage from "../utils/authStorage";
+import { useNavigate } from "react-router-native";
 
 const validationSchema = yup.object().shape({
     username: yup
@@ -17,6 +19,9 @@ const validationSchema = yup.object().shape({
 });
 
 const SignIn = () => {
+
+    const [signIn] = useSignIn();
+    const navigate = useNavigate();
 
     const initialValues = {
         username: "",
@@ -40,8 +45,14 @@ const SignIn = () => {
         }
     })
 
-    const onSubmit = (values) => {
+    const onSubmit = async(values) => {
         const { username, password } = values
+        try {
+            await signIn({ username, password })
+            navigate("/");
+        } catch(e) {
+            // console.log(e)
+        }
         console.log("username", username)
         console.log("password", password)
     }

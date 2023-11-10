@@ -3,6 +3,13 @@ import Constants from 'expo-constants';
 import theme from './themes';
 import Text from './Text';
 import { Link } from 'react-router-native';
+import useSignOut from '../hooks/useSignOut';
+import { useQuery } from '@apollo/client';
+import { ME } from '../GraphQL/queries';
+import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import AuthStorageContext from '../AuthStorageContext';
+import { useApolloClient } from '@apollo/client';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,15 +26,40 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const authStorage = useContext(AuthStorageContext);
+  const { data, loading, error } = useQuery(ME);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const apolloClient = useApolloClient();
+
+  useEffect(() => {
+    if(error) {
+      console.log(error.graphQLErrors)
+    }
+    if(data != null) {
+      setIsSignedIn(true)
+    }
+  }, [data, error]) 
+
+  const handleSignOut = async() => {
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+    setIsSignedIn(false)
+  }
+
+  console.log(isSignedIn)
+
   return (
     <View style={styles.container}>
         <ScrollView horizontal>
           <Pressable>
             <Link to='/'><Text style={styles.headLine}>Repositories</Text></Link>
           </Pressable>
-          <Pressable>
+          {!isSignedIn && <Pressable>
             <Link to='/signin'><Text style={styles.headLine}>Sign In</Text></Link>
-          </Pressable>
+          </Pressable>}
+          {isSignedIn && <Pressable onPress={handleSignOut}>
+            <Text style={styles.headLine}>Sign Out</Text>
+          </Pressable>}
         </ScrollView>
     </View>
   )
