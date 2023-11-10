@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_USER = gql`
+export const AUTHENTICATE = gql`
     mutation authenticate($credentials: AuthenticateInput) {
         authenticate(
             credentials: $credentials
@@ -8,6 +8,15 @@ export const CREATE_USER = gql`
             accessToken
         }
     }
+`
+
+export const CREATE_USER = gql`
+    mutation CreateUser($user: CreateUserInput!) {
+        createUser(user: $user) {
+        username
+        }
+    }
+  
 `
 
 export const CREATE_REVIEW = gql`
