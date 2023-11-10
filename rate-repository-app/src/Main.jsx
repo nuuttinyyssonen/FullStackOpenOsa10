@@ -4,6 +4,8 @@ import AppBar from "./components/AppBar";
 import theme from "./components/themes";
 import SignIn from "./components/SignIn";
 import { Route, Routes } from "react-router-native";
+import RepositoryView from './components/RepositoryView';
+import ReviewForm from "./components/ReviewForm";
 
 const Main = () => {
 
@@ -19,6 +21,8 @@ const Main = () => {
             <Routes>
                 <Route path="/" element={<RepositoryList />} />
                 <Route path="/signin" element={<SignIn/>}/>
+                <Route path="/review" element={<ReviewForm />} />
+                <Route path='/repository/:id' element={<RepositoryView />}/>
             </Routes>
         </View>
     )

@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Main from './Main';
+import Main from './src/Main';
 import { NativeRouter } from 'react-router-native';
 import { ApolloProvider } from '@apollo/client';
-import AuthStorage from "./utils/authStorage";
-import createApolloClient from "./utils/apolloClient";
-import AuthStorageContext from './AuthStorageContext';
+import AuthStorage from "./src/utils/authStorage";
+import createApolloClient from "./src/utils/apolloClient";
+import AuthStorageContext from './src/AuthStorageContext';
 
 const authStorage = new AuthStorage();
 const apolloClient = createApolloClient(authStorage);

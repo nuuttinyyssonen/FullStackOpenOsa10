@@ -9,13 +9,13 @@ import useSignIn from "../hooks/useSignIn";
 import AuthStorage from "../utils/authStorage";
 import { useNavigate } from "react-router-native";
 
-const validationSchema = yup.object().shape({
+export const validationSchema = yup.object().shape({
     username: yup
         .string()
         .required('Username is required'),
     password: yup
         .string()
-            .required('Password is required')
+        .required('Password is required')
 });
 
 const SignIn = () => {
@@ -51,7 +51,7 @@ const SignIn = () => {
             await signIn({ username, password })
             navigate("/");
         } catch(e) {
-            // console.log(e)
+            console.log(e)
         }
         console.log("username", username)
         console.log("password", password)

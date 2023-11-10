@@ -1,16 +1,18 @@
-import { View, Image, StyleSheet, Dimensions} from "react-native";
+import { View, Image, StyleSheet, Dimensions, Pressable} from "react-native";
+import {useNavigate} from 'react-router-native'
 import theme from "./themes";
 import Text from "./Text";
 
+
 const deviceWidth = Dimensions.get("window").width;
 
-const RepositoryItem = ({ fullName, description, language, stars, forks, reviews, rating, image }) => {
+const RepositoryItem = ({ fullName, description, language, stars, forks, reviews, rating, image, id, url }) => {
+
+    const navigate = useNavigate();
 
     const styles = StyleSheet.create({
         container: {
             display: "flex",
-            flexDirection: "column",
-            flex: 1,
             padding: 20,
             width: deviceWidth,
             maxWidth: deviceWidth,
@@ -62,8 +64,13 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
     const starsDivided = stars/1000;
     const forksDivided = forks/1000;
 
+    const navigateToRepo = (id) => {
+        navigate(`/repository/${id}`)
+    }
+
     return (
-        <View style={styles.container}>
+        <Pressable onPress={() => navigateToRepo(id)}>
+        <View style={styles.container} testID="repositoryItem">
             <View style={styles.header}>
                 <Image style={styles.image} source={{uri: image}}/>
                 <View style={styles.innerHeader}>  
@@ -89,10 +96,11 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
                 </View>
                 <View style={styles.innerRating}>
                     <Text>{rating}</Text>
-                    <Text>Ratings</Text>
+                    <Text>Rating</Text>
                 </View>
             </View>
         </View>
+        </Pressable>
     )
 }
 

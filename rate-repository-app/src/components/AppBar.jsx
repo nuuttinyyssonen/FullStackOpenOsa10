@@ -35,7 +35,7 @@ const AppBar = () => {
     if(error) {
       console.log(error.graphQLErrors)
     }
-    if(data != null) {
+    if(data && data.me != null) {
       setIsSignedIn(true)
     }
   }, [data, error]) 
@@ -46,13 +46,14 @@ const AppBar = () => {
     setIsSignedIn(false)
   }
 
-  console.log(isSignedIn)
-
   return (
     <View style={styles.container}>
         <ScrollView horizontal>
           <Pressable>
             <Link to='/'><Text style={styles.headLine}>Repositories</Text></Link>
+          </Pressable>
+          <Pressable>
+            <Link to='/review'><Text style={styles.headLine}>Create a review</Text></Link>
           </Pressable>
           {!isSignedIn && <Pressable>
             <Link to='/signin'><Text style={styles.headLine}>Sign In</Text></Link>
