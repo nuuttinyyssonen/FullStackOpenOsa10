@@ -57,6 +57,7 @@ const AppBar = () => {
             <Text style={styles.headLine}>Sign Out</Text>
           </Pressable>}
           <Link to='/signup'><Text style={styles.headLine}>Sign up</Text></Link>
+          {isSignedIn && <Link to='/reviewpage'><Text style={styles.headLine}>My Reviews</Text></Link>}
         </ScrollView>
     </View>
   )

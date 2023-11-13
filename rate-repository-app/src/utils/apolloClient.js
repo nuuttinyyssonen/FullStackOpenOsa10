@@ -3,7 +3,7 @@ import { Constants } from 'expo-constants';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: "http://172.20.10.2:4000",
+  uri: "http://10.214.1.15:4000",
 });
 
 const createApolloClient = (authStorage) => {

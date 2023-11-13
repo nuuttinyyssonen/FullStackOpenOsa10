@@ -1,4 +1,4 @@
-import { useParams,useLocation } from "react-router-native"
+import { useParams } from "react-router-native"
 import Text from "./Text"
 import { Button, View, StyleSheet, Pressable, FlatList } from "react-native"
 import * as Linking from 'expo-linking';
@@ -12,7 +12,6 @@ import useRepository from "../hooks/useRepository";
 const RepositoryView = () => {
 
     const id = useParams().id;
-    const location = useLocation();
     const reviews = useReviews(id);
     const {repository, loading} = useRepository(id);
 
@@ -36,9 +35,6 @@ const RepositoryView = () => {
     }
 
     const ReviewNodes = reviews.reviews ? reviews.reviews.reviews.edges.map(edge => edge.node) : [];
-    if(repository) {
-        console.log(repository.image)
-    }
     
     return (
         <View>
